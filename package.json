@@ -1,0 +1,23 @@
+{
+  "name": "family_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trabnett/family_project_with_wyatt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trabnett/family_project_with_wyatt/issues"
+  },
+  "homepage": "https://github.com/trabnett/family_project_with_wyatt#readme"
+}
