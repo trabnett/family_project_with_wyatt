@@ -1,0 +1,48 @@
+<div style='margin: 8em 15em;'>
+    <div style='text-align: center;'>
+      <h1>Add a member to my family:</h1>
+    </div>
+    <div style='margin: 0 auto; width: 60%;'>
+      <form method='POST'>
+        <label>Name</label><br>
+        <input type='text' name='Name' required>
+        <br>
+        <br>
+        <label>Age</label><br>
+        <input type='number' name='Age' min=0 required>
+        <br>
+        <br>
+        <label>Gender</label><br>
+        <select name='Gender'>
+          <option value='female' selected>Female</option>
+          <option value='male'>Male</option>
+          <option value='other'>Other</option>
+        </select>
+        <br>
+        <br>
+        <label>Favorite Food</label><br>
+        <input type='text' name='Food' required>
+        <br>
+        <br>
+        <label>Adult</label><br>
+        <input type="radio" id="adult" name="Adult" value=1 checked>
+        <label for="adult">Adult</label><br>
+        <input type="radio" id="chld" name="Adult" value=0>
+        <label for="child">Child</label><br>
+        <br>
+        <br>
+        <label>Grandparent</label><br>
+        <input type="radio" id="not-grandparent" name="Grandparent" value=0 checked>
+        <label for="not-grandparent">Not Grandparent</label><br>
+        <input type="radio" id="grandparent" name="Grandparent" value=1>
+        <label for="grandparent">Grandparent</label><br>
+        <br>
+        <br>
+        <label>Species</label><br>
+        <input type='text' name='species' required>
+        <br>
+        <br>
+        <button type='submit' style='cursor: pointer;'>Submit</button>
+      </form>
+    </div>
+</div>
