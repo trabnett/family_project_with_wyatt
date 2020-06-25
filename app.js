@@ -1,16 +1,15 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 8080;
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
-var env_vars = require('./env_vars.js');
 
 var mysql=require('mysql');
 var connection=mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:env_vars['db_password'],
-  database:'family'
+  host:process.env.db_host,
+  user:process.env.db_user,
+  password:process.env.db_password,
+  database:process.env.db_database
 });
 connection.connect(function(error){
   if(!!error){
