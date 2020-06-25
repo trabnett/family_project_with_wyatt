@@ -4,40 +4,41 @@ const port = process.env.PORT || 8080;
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
-var mysql=require('mysql');
-var connection=mysql.createConnection({
-  host:process.env.db_host,
-  user:process.env.db_user,
-  password:process.env.db_password,
-  database:process.env.db_database
-});
-connection.connect(function(error){
-  if(!!error){
-    console.log(error);
-  }else{
-    console.log('Connected!:)');
+const { Client } = require('pg');
+const connection = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
+connection.connect();
 
+function boolize(string){
+  if (string == '1'){
+    return true;
+  } else {
+    return false;
+  };
+};
 app.get('/', (req, res) => {
   connection.query("SELECT * FROM family", function (err, result, fields){
     if (err) throw err;
     let templateVars = {
-      'family': result
+      'family': result.rows
     }
+    console.log('-------->', result.rows)
     res.render ( "home.ejs", templateVars );
   });
 })
 
 app.post('/', (req, res) => {
-  const queryString = "delete from family where id = ?"
-  const value = [req.body['family_member_id']]
-  connection.query(queryString, value, function (err, result, fields){
+  const queryString = `delete from family where id = ${req.body['family_member_id']}`
+  connection.query(queryString, function (err, result, fields){
     if (err) throw err;
     connection.query("SELECT * FROM family", function (err, result, fields){
       if (err) throw err;
       let templateVars = {
-        'family': result
+        'family': result.rows
       }
       res.render ( "home.ejs", templateVars );
     });
@@ -49,17 +50,15 @@ app.get('/new', (req, res) => {
 })
 
 app.post('/new', (req,res) => {
-  const queryString = "insert into family (Name, Age, Gender, Food, Adult, Grandparent, species) values (?,?,?,?,?,?,?)";
-  const values = [];
-  for (i in req.body) {
-    values.push(req.body[i])
-  }
-  connection.query(queryString, values, function (err, result, fields){
+  let inputs = [req.body['Name'], req.body['Age'], req.body['Gender'], req.body['Food'], boolize(req.body['Adult']), boolize(req.body['Grandparent']), req.body['species'],]
+  const queryString = `insert into family (name, age, gender, food, adult, grandparent, species) values ('${inputs[0]}',${inputs[1]},'${inputs[2]}','${inputs[3]}',${inputs[4]},${inputs[5]},'${inputs[6]}')`;
+  connection.query(queryString, function (err, result, fields){
+    console.log('>>>', queryString, err, result, fields)
     if (err) throw err;
     connection.query("SELECT * FROM family", function (err, result, fields){
       if (err) throw err;
       let templateVars = {
-        'family': result
+        'family': result.rows
       }
       res.render ( "home.ejs", templateVars );
     });

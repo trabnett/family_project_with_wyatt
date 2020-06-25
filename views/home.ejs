@@ -16,12 +16,12 @@
       </tr>
       <% for (i in family) {%>
         <tr>
-          <td><%= family[i]['Name'] %></td>
-          <td><%= family[i]['Age'] %></td>
-          <td><%= family[i]['Gender'] %></td>
-          <td><%= family[i]['Food'] %></td>
-          <td><%= family[i]['Adult'] %></td>
-          <td><%= family[i]['Grandparent'] %></td>
+          <td><%= family[i]['name'] %></td>
+          <td><%= family[i]['age'] %></td>
+          <td><%= family[i]['gender'] %></td>
+          <td><%= family[i]['food'] %></td>
+          <td><%= family[i]['adult'] %></td>
+          <td><%= family[i]['grandparent'] %></td>
           <td><%= family[i]['species'] %></td>
           <td>
             <form method='POST' action='/' style='cursor: pointer; display: table-cell; color: red;' onclick='this.submit()'>

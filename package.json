@@ -13,7 +13,8 @@
     "bower": "^1.5.2",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "pg": "^8.2.1",
+    "psql": "0.0.1"
   },
   "devDependencies": {},
   "repository": {
